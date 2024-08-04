@@ -1,238 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=7">
-    <meta name="viewport" content="width = device-width , initial-scale=1.0">
-    <title>Weather App</title>
-    <meta name="description" content="It is an App which shows Weather forecast  upto 5 consecutive days"> 
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Primary meta tags -->
+    <title>weatherio</title>
+    <meta name="title" content="weatherio" />
+    <meta
+      name="description"
+      content="weatherio is a weather app made by billal benzazoua"
+    />
     <!-- favicon -->
-    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="shortcut icon" href="favicon.svg" type="image/svg+xml" />
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- custom css link -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- custom js link -->
+    <script src="./assets/js/app.js" defer type="module"></script>
+    <script src="./assets/js/route.js" defer type="module"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <a href="#/weather" class="logo">
+          <img
+            src="./assets/images/logo.png"
+            width="364"
+            height="58"
+            alt="logo"
+          />
+        </a>
+        <div class="search-view" data-search-view>
+          <div class="search-wrapper">
+            <input
+              type="search"
+              name="search"
+              placeholder="Search city..."
+              autocomplete="off"
+              class="search-field"
+              data-search-field
+            />
+            <span class="m-icon leading-icon">search</span>
+            <button
+              class="icon-btn leading-icon has-state"
+              aria-label="close search"
+              data-search-toggler
+            >
+              <span class="m-icon">arrow_back</span>
+            </button>
+          </div>
+          <div class="search-result" data-search-result></div>
+        </div>
+        <div class="header-actions">
+          <button
+            class="icon-btn has-state"
+            aria-label="open search"
+            data-search-toggler
+          >
+            <span class="m-icon">search</span>
+          </button>
+          <a
+            href="#/current-location"
+            class="btn-primary has-state"
+            data-current-location-btn
+          >
+            <span class="m-icon">my_location</span>
+            <span class="span">Current Location</span>
+          </a>
+        </div>
+      </div>
+    </header>
 
-    <!-- googe fonts links -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <main>
+      <article class="container" data-container>
+        <div class="content-left">
+          <!-- Current Weather -->
+          <section
+            class="section current-weather"
+            aria-label="current weather"
+            data-current-weather
+          ></section>
 
-    <!-- css -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-
-    <!-- js -->
-    <script type="module" src="./assets/js/app.js"></script>
-    <script type="module" src="./assets/js/route.js"></script>
-</head>
-<body>
-    
-    <!-- 1.Navbar -->
-   
-    <div class="navbar_container">
-        <div class="logo_container">
-            <img src="./assets/images/logo.png" alt="this is logo">
-            <h1 class="logo_text">Weather App</h1>
+          <!-- Weather Forecast -->
+          <section
+            class="section forecast"
+            aria-labelledby="forecast-label"
+            data-5-day-forecast
+          ></section>
         </div>
 
-        <div class="searchbar_container">
-            <input type="text" placeholder="Search Here">
+        <div class="content-right">
+          <!-- #HIGHLIGHTS -->
+          <section
+            class="section highlights"
+            aria-labelledby="highlights-label"
+            data-highlights
+          ></section>
+
+          <!-- #HOURLY FORECAST -->
+          <section
+            class="section hourly-forecast"
+            aria-label="hourly forecast"
+            data-hourly-forecast
+          ></section>
+
+          <!-- #FOOTER -->
+          <footer class="footer">
+            <p class="body-3">
+              CopyRight &copy; <span data-year>2024</span> billal
+              benz. All rights reserved.
+            </p>
+            <p class="body-3">
+              Powered by
+              <a
+                href="https://openweathermap.org/api"
+                title="Free OpenWeather Api"
+                target="_blank"
+                rel="noopener"
+              >
+                <img
+                  src="./assets/images/openweather.png"
+                  width="150"
+                  height="30"
+                  loading="lazy"
+                  alt="OpenWeather"
+                />
+              </a>
+            </p>
+          </footer>
         </div>
 
-        <div class="detect-location_container">
-            <button type="button">
-                Detect Location</button>
-        </div>
+        <div class="loading" data-loading></div>
+      </article>
+    </main>
 
-    </div>
-
-    <!-- body  -->
-    <div class="main_body__container">
-        <div class="current_forecast_container">
-            <h1 class="headings">Now</h1>
-            <div class="temperature-container">
-                <h2 class="temperature"><span class="dynamic-temperature">5</span>&degc</h2>
-                <img src="./assets/images/weather_icons/01d.png" alt="" class="temperature-image">
-            </div>
-            <h2 class="weather-condition">Sunny</h2>
-            <hr color="grey">
-            <div class="date-container">
-                <!-- <img src="./assets/images/weather_icons/" alt=""> -->
-                <h2 class="current-date"> Wednesday 1,Mar</h2>
-                <h2 class="current-location">INdia,bb</h2>
-            </div>
-        </div>
-        <div class="todays_highlights_container">
-            <h1 class="headings">Todays Highlights</h1>
-            
-                <div class="mesurement-container">
-                    <div class="index-container">
-                        <div class="parameter-index">
-                            <div class="heading-container">
-                                <h1 class="sub-headings">Air Quality Index</h1>
-                                <h1 class="weather-status">Good</h1>
-                            </div>
-                            <div class="air-parameter-container">
-                                <img src="./assets/images/weather_icons/50d.png" alt="" class="wind-image">
-                                <div class="parameter">
-                                    <h2 id="PM25-heading" class="parameter__heading">PM25</h2>
-                                    <h2 id="PM25-measurement" class="parameter__measurement">25</h2>
-                                </div>
-                                <div class="parameter">
-                                    <h2 id="SO2-heading" class="parameter__heading">SO2</h2>
-                                    <h2 id="SO2-heading-measurement " class="parameter__measurement">12</h2>
-                                </div>
-                                <div class="parameter">
-                                    <h2 id="NO2-heading" class="parameter__heading">NO2</h2>
-                                    <h2 id="NO2-measurement" class="parameter__measurement">33.9</h2>
-                                </div>
-                                <div class="parameter">
-                                    <h2 id="O3-heading" class="parameter__heading">O3</h2>
-                                    <h2 id="O3-measurement" class="parameter__measurement">39.5</h2>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="humidity-pressure-container">
-                            <div class="parameter-container">
-                                <h1 class="sub-headings">Humidity</h1>
-                                <div class="parameter-measurement-container">
-                                    <img src="./assets/images/weather_icons/02n.png" alt="" class="parameter-image">
-                                    <h1 class="parameter-measurement"><span id="humidity-measurement">32</span>%</h1>
-                                </div>
-                            </div>
-
-                            <div class="parameter-container">
-                                <h1 class="sub-headings">Pressure</h1>
-                                <div class="parameter-measurement-container">
-                                    <img src="./assets/images/weather_icons/02n.png" alt="" class="parameter-image">
-                                    <h1 class="parameter-measurement" id="pressure-measurement">1025hPa</h1>
-                                </div>
-                            </div>
-
-                            
-                            
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="mesurement-container">
-                    <div class="index-container">
-                        <div class="parameter-index">
-                            <div class="heading-container">
-                                <h1 class="sub-headings">Sunrise & Sunset</h1>
-                                
-                            </div>
-                            <div class="air-parameter-container">
-                                <img src="./assets/images/weather_icons/03d.png" alt="" class="sun-image">
-                                <div class="parameter">
-                                    <h2 id="Sunrise-heading" class="parameter__heading">Sunrise</h2>
-                                    <h2 id="Sunrise-measurement" class="parameter__measurement"> 6:54 AM </h2>
-                                </div>
-                                <div class="parameter">
-                                    <h2 id="Sunset-heading" class="parameter__heading">Sunset</h2>
-                                    <h2 id="Sunset-heading-measurement " class="parameter__measurement" >5:39 PM</h2>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="visibility-fellslike-container">
-                            <div class="parameter-container">
-                                <h1 class="sub-headings">Visibility</h1>
-                                <div class="parameter-measurement-container">
-                                    <img src="./assets/images/weather_icons/02n.png" alt="" class="parameter-image">
-                                    <h1 class="parameter-measurement" id="visibility-measurement">10km</h1>
-                                </div>
-                            </div>
-
-                            <div class="parameter-container">
-                                <h1 class="sub-headings">Feels Like</h1>
-                                <div class="parameter-measurement-container">
-                                    <img src="./assets/images/weather_icons/02n.png" alt="" class="parameter-image">
-                                    <h1 class="parameter-measurement" id="feels-like-measurement">2 &deg;C</h1>
-                                </div>
-                            </div>
-
-                            
-                            
-                        </div>
-
-                    </div>
-                    
-                </div>
-            </div>
-        
-        <div class="DailyForecast_container">
-            <h1 class="headings">5 Days Forecast</h1>
-            <div class="five-day-forecast-container">
-                <div class="next-day-forecast">
-                    <div class="next-day-temperature">
-                        <img src="./assets/images/logo.png" alt="" class="next-day-image next1st-day-image">
-                        <h1 class="next-day-temp-measurement">7&deg;</h1>
-                    </div>
-                    <h1 class="next1st-day-date sub-headings">2 Mar</h1>
-                    <h1 class="next1st-day-day sub-headings">Wednesday</h1>
-                </div>
-
-
-                <div class="next-day-forecast">
-                    <div class="next-day-temperature">
-                        <img src="./assets/images/logo.png" alt="" class="next-day-image next2nd-day-image">
-                        <h1 class="next-day-temp-measurement">7&deg;</h1>
-                    </div>
-                    <h1 class="next2nd-day-date sub-headings">3 Mar</h1>
-                    <h1 class="next2nd-day-day sub-headings">Thursday</h1>
-                </div>
-
-                <div class="next-day-forecast">
-                    <div class="next-day-temperature">
-                        <img src="./assets/images/logo.png" alt="" class="next-day-image next3rd-day-image">
-                        <h1 class="next-day-temp-measurement">7&deg;</h1>
-                    </div>
-                    <h1 class="next3rd-day-date sub-headings">4Mar</h1>
-                    <h1 class="next3rd-day-day sub-headings">Friday</h1>
-                </div>
-
-                <div class="next-day-forecast">
-                    <div class="next-day-temperature">
-                        <img src="./assets/images/logo.png" alt="" class="next-day-image next4th-day-image">
-                        <h1 class="next-day-temp-measurement">7&deg;</h1>
-                    </div>
-                    <h1 class="next4th-day-date sub-headings">5 Mar</h1>
-                    <h1 class="next4th-day-day sub-headings">Saturday</h1>
-                </div>
-
-                <div class="next-day-forecast">
-                    <div class="next-day-temperature">
-                        <img src="./assets/images/logo.png" alt="" class="next-day-image next5th-day-image">
-                        <h1 class="next-day-temp-measurement">7&deg;</h1>
-                    </div>
-                    <h1 class="next5th-day-date sub-headings">6 Mar</h1>
-                    <h1 class="next5th-day-day sub-headings">sunday</h1>
-                </div>
-                
-            </div>
-        </div>
-        <div class="hourly_container">
-            <h1 class="headings">Today at</h1>
-            <div class="hourly-temperature-container">
-                <div class="hourly-temperature-readings">
-                    <h1 class="hourly-temp-time ">9PM</h1>
-                    <img src="./assets/images/weather_icons/03n.png" alt="" class="hourly-temp-image">
-                    <h1 class="hourly-temp-measurement">5&deg;</h1>
-                </div>
-                <div class="hourly-temperature-readings">
-                    <h1 class="hourly-temp-time ">9PM</h1>
-                    <img src="./assets/images/weather_icons/03n.png" alt="" class="hourly-temp-image">
-                    <h1 class="hourly-temp-measurement">5&deg;</h1>
-                </div>
-
-                <div class="hourly-temperature-readings">
-                    <h1 class="hourly-temp-time ">9PM</h1>
-                    <img src="./assets/images/weather_icons/03n.png" alt="" class="hourly-temp-image">
-                    <h1 class="hourly-temp-measurement">5&deg;</h1>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</body>
+    <!-- #404 SECTION -->
+    <section class="error-content" data-error-content>
+      <h2 class="heading">404</h2>
+      <p class="body-1">Page not found!</p>
+      <a href="#/weather?lat=34.883850&lon=-1.314020" class="btn-primary">
+        <span class="span">Go Home</span>
+      </a>
+    </section>
+  </body>
 </html>
